@@ -1,4 +1,4 @@
-# Socket Programming
+# SocketChat-RealTime
 
 ## Creating a Connection Using Sockets
 
@@ -133,4 +133,3 @@ Sends data from the buffer to the socket.
 
 127.0.0.1 is the loopback IP address. It refers to your own machine (localhost).
 It’s used for testing or communication within the same device, not across a network.# SocketChat-RealTime
-# SocketChat-RealTime
