@@ -8,16 +8,25 @@
 
 int main() {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) return 1;
-
+    
     int port = 5000;
-    struct sockaddr_in client;
-    client.sin_family = AF_INET;
-    client.sin_port = htons(port);
-    client.sin_addr.s_addr = inet_addr("127.0.0.1");
+    struct sockaddr_in server;
+    server.sin_family = AF_INET;
+    server.sin_port = htons(port);
+    server.sin_addr.s_addr = INADDR_ANY;
 
-    const char *msg = "Hello from UDP server";
-    sendto(sockfd, msg, strlen(msg), 0, (struct sockaddr *)&client, sizeof(client));
+    bind(sockfd, (struct sockaddr *)&server, sizeof(server));
+
+    printf("UDP Server listening on port %d...\n", port);
+    
+    char buffer[256];
+    struct sockaddr_in client;
+    socklen_t client_len = sizeof(client);
+
+    ssize_t n = recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0, (struct sockaddr *)&client, &client_len);
+
+    buffer[n] = '\0';
+    printf("Received from client: %s\n", buffer);
 
     close(sockfd);
     return 0;
