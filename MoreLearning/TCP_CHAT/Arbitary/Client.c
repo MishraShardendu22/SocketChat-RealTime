@@ -24,7 +24,6 @@ int main() {
         return 1;
     }
 
-    // Chat Loop
     char buffer[256];
     while (1) {
         // initialize array with 0
